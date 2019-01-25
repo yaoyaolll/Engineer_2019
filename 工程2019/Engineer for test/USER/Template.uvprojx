@@ -498,11 +498,6 @@
               <FilePath>..\Mylib\pid.c</FilePath>
             </File>
             <File>
-              <FileName>state.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Mylib\state.c</FilePath>
-            </File>
-            <File>
               <FileName>float2byte.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Mylib\float2byte.c</FilePath>
@@ -511,6 +506,11 @@
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Mylib\delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>state.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\state.c</FilePath>
             </File>
             <File>
               <FileName>chassis_task.c</FileName>
@@ -526,6 +526,11 @@
               <FileName>solenoid_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Mylib\solenoid_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>landing_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\landing_task.c</FilePath>
             </File>
           </Files>
         </Group>

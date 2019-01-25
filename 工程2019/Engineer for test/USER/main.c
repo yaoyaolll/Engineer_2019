@@ -7,10 +7,13 @@
 #include "usart3.h"
 #include "uart5.h"
 #include "chassis_task.h"
+#include "track_task.h"
+#include "solenoid_task.h"
+#include "landing_task.h"
 
 flag_t g_flag;
-int ms50, tick50;						//分频定时
-int cur_error_num, last_error_num;			//错误码
+int ms50, tick50;						    //分频定时
+int cur_error_num, last_error_num;			//错误码                      
 
  /**
   * @brief  主函数
@@ -48,19 +51,17 @@ void SysTick_Handler(void)
         TIM_Cmd(TIM2, DISABLE);
         LED_R_OFF;
         switch_mode();							 		//判断控制模式
-        if(g_flag.control_mode == RC_MODE || g_flag.control_mode == KEY_MODE)				//遥控及键鼠模式,手动模式
+        if(g_flag.control_mode == RC_MODE || g_flag.control_mode == KEY_MODE)				//遥控及键鼠模式
         {
             chassis_cal();							//计算底盘移动
-//            ExpandCal();							//计算底盘升降
-//			TransformCal();							//计算上层变形
-//			solenoid_action();						//电磁阀控制 
+			track_cal(); 
+			solenoid_action();
 //			WOffset(0.2f);							//快速偏置旋转
         }
-//		else if(Flag.ContralMode == LANDING_ON)		//上岛模式
-//		{	
-//			MagTransform(MagDown, 0, 0);
-//			LandingAction();						//上岛状态机
-//		}
+		else if(g_flag.control_mode == LANDING_ON)		//上岛模式
+		{	
+			landing_action();
+		}
 //		else if(Flag.ContralMode == LANDING_OFF)	//下岛模式
 //		{	
 //			MagTransform(MagDown, 0, 0);

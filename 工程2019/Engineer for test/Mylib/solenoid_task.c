@@ -42,16 +42,34 @@ void solenoid_config()
   */
 void solenoid_action(void)
 {
-	if(g_flag.control_mode == RC_MODE && g_flag.control_target == CHASSIS_MODE)		//处于遥控模式，底盘升降模式
+	if(g_flag.control_mode == RC_MODE && g_flag.control_target == CHASSIS_MODE)					//处于遥控模式，控制底盘及补弹气缸
 	{
-		if(rc_ctrl.rc.ch3 > 1500)
+		if (rc_ctrl.rc.ch3 > 1500)
+			FILL_BULLET_OPEN;
+		else if (rc_ctrl.rc.ch3 < 500)
+			FILL_BULLET_CLOSE;
+	}
+	else if (g_flag.control_mode == RC_MODE && g_flag.control_target == MANUAL_LAND_MODE)    	//处于遥控模式，控制手动登岛
+	{
+		if (rc_ctrl.rc.ch2 > 1500)
 		{
 			ASSIST_LEG_ON;													//打开登岛辅助腿
 		}
-		else if (rc_ctrl.rc.ch3 < 500)
+		else if (rc_ctrl.rc.ch2 < 500)
 		{
 			ASSIST_LEG_OFF;													//关闭登岛辅助腿
 		}
+	} 
+	else if (g_flag.control_mode == RC_MODE && g_flag.control_target == MAGAZINE_MODE)          //处于遥控模式，控制上层
+	{
+		if (rc_ctrl.rc.ch2 > 1500)
+			UP_PAW_OPEN;													//取弹手张开
+		else if (rc_ctrl.rc.ch2 < 500)
+			UP_PAW_CLOSE;													//取弹手关闭
+		
+		if (rc_ctrl.rc.ch3 > 1500)											//旋转气缸张开
+			ROTARY_CYLINDER_OPEN;
+		else if (rc_ctrl.rc.ch3 < 500)
+			ROTARY_CYLINDER_CLOSE;											//旋转气缸关闭
 	}
-	
 }

@@ -32,3 +32,6 @@
 .\objects\main.o: ..\Mylib\usart3.h
 .\objects\main.o: ..\Mylib\uart5.h
 .\objects\main.o: ..\Mylib\chassis_task.h
+.\objects\main.o: ..\Mylib\track_task.h
+.\objects\main.o: ..\Mylib\solenoid_task.h
+.\objects\main.o: ..\Mylib\landing_task.h

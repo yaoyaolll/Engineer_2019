@@ -136,6 +136,11 @@ typedef struct
 	float remain_energy;       //剩余能量
 }game_data_t;
 
+typedef enum
+{
+	STATE0 = 0, STATE1, STATE2, STATE3, STATE4, STATE5, STATE6, STATE7
+}landing_state_e;
+
 typedef struct
 {
 	u8 control_mode;           //控制模式
@@ -155,6 +160,8 @@ typedef struct
 	u8 gyro_use_flag;         //是否启用陀螺仪
 	
 	u8 initial_flag;
+	
+	landing_state_e landing_state;         //自动登岛状态标志
 }flag_t;
 
 typedef union
@@ -189,9 +196,10 @@ typedef struct
 #define EXPAND_MODE 		0x08		//控制底盘升降
 #define RESCUE_MODE 		0X09		//控制救援机械手
 #define MANUAL_LAND_MODE    0X10        //手动控制登岛
+#define INITIALIZE_MODE		0X11        //所有装置回位
 
 extern flag_t g_flag;
-extern int cur_error_num;				//断线错误号
+extern int cur_error_num;				//断线错误号 
 
 void System_Configration(void);
 

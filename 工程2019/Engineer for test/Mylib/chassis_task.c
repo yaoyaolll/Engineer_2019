@@ -86,7 +86,7 @@ void chassis_cal(void)
 {  
 	if (g_flag.initial_flag == 1)
 	{
-		if (g_flag.control_mode == RC_MODE && g_flag.control_target == CHASSIS_MODE)
+		if (g_flag.control_mode == RC_MODE && g_flag.control_target == CHASSIS_MODE)         //处于遥控模式，控制底盘及补弹气缸
 		{
 			if (rc_ctrl.rc.ch0 > 1044 || rc_ctrl.rc.ch0 < 1004)
 				vx = (1024 - rc_ctrl.rc.ch0) * 10.0f;
@@ -110,8 +110,32 @@ void chassis_cal(void)
 					vw = (1024 - rc_ctrl.rc.ch2) * 10.0f;
 			}
 		}
+		else if (g_flag.control_mode == RC_MODE && g_flag.control_target == MANUAL_LAND_MODE)  //处于遥控模式，控制手动登岛
+		{
+			vx = 0;
+			
+			if (rc_ctrl.rc.ch1 > 1044 || rc_ctrl.rc.ch1 < 1004)
+				vy = (1024 - rc_ctrl.rc.ch1) * 10.0f;
+			else 
+				vy = 0;
+			
+			if (rc_ctrl_last.rc.s2 == 3)              //进入此模式时记录陀螺仪位置
+				chassis_pos_follow_pid.SetPoint = yaw_angle;
+			if (g_flag.gyro_use_flag)	//使用陀螺仪数据
+			{
+				chassis_vel_follow_pid.SetPoint = LIMIT_MAX_MIN(PID_Calc(&chassis_pos_follow_pid, yaw_angle), 5.7f, -5.7f);
+				vw = PID_Calc(&chassis_vel_follow_pid, gz);
+			}
+			else						//不使用陀螺仪数据
+				vw = 0;
+		}
+		else if (g_flag.control_mode == RC_MODE && g_flag.control_target == MAGAZINE_MODE)    //处于遥控模式，控制上层
+		{
+			vx = vy = vw = 0;
+		}
 		else if (g_flag.control_mode == KEY_MODE)
 		{
+			vx = vy = vw = 0;
 		}
 		else 
 			vx = vy = vw = 0;

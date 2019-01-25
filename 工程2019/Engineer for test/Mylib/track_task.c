@@ -16,14 +16,13 @@ extern rmc620_t track_motor[2];
   */
 void track_cal(void)
 {	
-	if (g_flag.control_mode == RC_MODE && g_flag.control_target == CHASSIS_MODE)         
+	if (g_flag.control_mode == RC_MODE && g_flag.control_target == MANUAL_LAND_MODE)        //处于遥控模式，控制底盘及补弹气缸         
 	{
 		if (rc_ctrl.rc.ch3 > 1500)
 			track_on_flag = 1;
 		else if (rc_ctrl.rc.ch3 < 500)
 			track_on_flag = 0;
 	}
-	
 	else
 		track_on_flag = 0;
 	
@@ -32,7 +31,7 @@ void track_cal(void)
 		track_vel_pid[0].SetPoint = -5000;
 		track_vel_pid[1].SetPoint = 5000;
 	}		
-	else                         //关闭履带
+	else                                  //关闭履带
 		track_vel_pid[0].SetPoint = track_vel_pid[1].SetPoint = 0;
 	
 	//PID计算

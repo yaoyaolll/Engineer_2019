@@ -77,12 +77,12 @@ void switch_mode(void)
 		if (rc_ctrl_last.rc.s1 == 2)
 			chassis_pos_follow_pid.SetPoint = yaw_angle;
 		
-		if (rc_ctrl.rc.s2 == 3)
-			g_flag.control_target = CHASSIS_MODE;
-		else if (rc_ctrl.rc.s2 == 1)
-			g_flag.control_target = MANUAL_LAND_MODE;     
-		else if (rc_ctrl.rc.s2 == 2)
-			g_flag.control_target = MAGAZINE_MODE;
+		if (rc_ctrl.rc.s2 == 3)                           //拨杆在中
+			g_flag.control_target = CHASSIS_MODE;         //控制底盘
+		else if (rc_ctrl.rc.s2 == 2)                      //拨杆在下
+			g_flag.control_target = MANUAL_LAND_MODE;     //手动控制登岛
+		else if (rc_ctrl.rc.s2 == 1) 
+			g_flag.control_target = MAGAZINE_MODE;        //控制上层
 	}
 	else if (rc_ctrl.rc.s1 == 2)      //断电模式
 	{
@@ -90,11 +90,23 @@ void switch_mode(void)
 	}
 	else if (rc_ctrl.rc.s1 == 1)      //键鼠模式
 	{
-		if (rc_ctrl.rc.s2 == 2)
+		if (rc_ctrl.rc.s2 == 2)       //测试自动登岛
 		{
+			if (rc_ctrl_last.rc.s1 != 1 || (rc_ctrl_last.key.d == 0 && rc_ctrl.key.d == 1 && rc_ctrl.key.ctrl == 1))
+				g_flag.control_mode = KEY_MODE;
+			
+			if (rc_ctrl_last.key.b == 0 && rc_ctrl.key.b == 1 && rc_ctrl.key.ctrl == 1)
+				g_flag.control_mode = INITIALIZE_MODE;
 		}
-		else if (rc_ctrl.rc.s2 == 3)
+		else if (rc_ctrl.rc.s2 == 3)  //测试自动登岛
 		{
+			if (rc_ctrl_last.key.b == 0 && rc_ctrl.key.b == 1 && rc_ctrl.key.ctrl == 1)
+				g_flag.control_mode = INITIALIZE_MODE;
+			if (rc_ctrl_last.key.r == 0 && rc_ctrl.key.r == 1 && rc_ctrl.key.ctrl == 1)
+			{
+				g_flag.control_mode = LANDING_ON;
+				g_flag.landing_state = STATE0;
+			}
 		}
 		else if (rc_ctrl.rc.s2 == 1)
 		{
