@@ -142,5 +142,29 @@ void chassis_cal(void)
 		
 		chassis_task(vx, vy, vw);	
 	}
+}
+
+/**
+  * @brief  底盘全向移动
+  * @param  vx：左右速度
+			vy：前后速度
+			vw：旋转速度
+  * @retval None
+  */
+void all_move(int vx, int vy, float vw_offset)
+{
+	int vw;
 	
+	if (g_flag.gyro_use_flag)
+	{
+		chassis_pos_follow_pid.SetPoint += vw_offset;
+		chassis_vel_follow_pid.SetPoint = LIMIT_MAX_MIN(PID_Calc(&chassis_pos_follow_pid, yaw_angle), 5.7f, -5.7f);
+		vw = PID_Calc(&chassis_vel_follow_pid, gz);
+	}
+	else                              //通过键鼠控制
+	{
+		
+	}
+	
+	chassis_task(vx, vy, vw);	
 }

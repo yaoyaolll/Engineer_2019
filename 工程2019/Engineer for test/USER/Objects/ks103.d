@@ -1,4 +1,4 @@
-.\objects\ks103.o: ..\Mylib\KS103.c
+.\objects\ks103.o: ..\Mylib\ks103.c
 .\objects\ks103.o: ..\USER\stm32f4xx.h
 .\objects\ks103.o: ..\CMSIS\core_cm4.h
 .\objects\ks103.o: D:\Keil_MDK\ARM\ARMCC\Bin\..\include\stdint.h
@@ -24,6 +24,6 @@
 .\objects\ks103.o: D:\Keil_MDK\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\ks103.o: D:\Keil_MDK\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\ks103.o: D:\Keil_MDK\ARM\ARMCC\Bin\..\include\math.h
-.\objects\ks103.o: ..\Mylib\KS103.h
+.\objects\ks103.o: ..\Mylib\ks103.h
 .\objects\ks103.o: ..\Mylib\delay.h
-.\objects\ks103.o: ..\Mylib\IIC.h
+.\objects\ks103.o: ..\Mylib\iic.h

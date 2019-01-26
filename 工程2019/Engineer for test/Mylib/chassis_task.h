@@ -5,5 +5,6 @@ void chassis_vel_pid_init(float p, float i, float d, float i_max);
 void chassis_cal(void);
 void chassis_task(int vx, int vy, int vw);
 void chassis_power_off(void);
-
+void all_move(int vx, int vy, float vw_offset);
+	
 #endif

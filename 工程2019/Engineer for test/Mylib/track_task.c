@@ -23,6 +23,12 @@ void track_cal(void)
 		else if (rc_ctrl.rc.ch3 < 500)
 			track_on_flag = 0;
 	}
+	else if(g_flag.control_mode == LANDING_ON)
+	{
+		track_on_flag = 1;
+		if (g_flag.landing_state == STATE7)
+			track_on_flag = 0;
+	}
 	else
 		track_on_flag = 0;
 	

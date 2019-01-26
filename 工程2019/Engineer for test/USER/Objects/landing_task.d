@@ -25,3 +25,5 @@
 .\objects\landing_task.o: ..\FWlib\inc\stm32f4xx_usart.h
 .\objects\landing_task.o: ..\FWlib\inc\misc.h
 .\objects\landing_task.o: ..\FWlib\inc\stm32f4xx_can.h
+.\objects\landing_task.o: ..\Mylib\solenoid_task.h
+.\objects\landing_task.o: ..\Mylib\chassis_task.h

@@ -532,6 +532,16 @@
               <FileType>1</FileType>
               <FilePath>..\Mylib\landing_task.c</FilePath>
             </File>
+            <File>
+              <FileName>iic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\iic.c</FilePath>
+            </File>
+            <File>
+              <FileName>ks103.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Mylib\ks103.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

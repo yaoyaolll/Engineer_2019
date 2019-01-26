@@ -1,4 +1,4 @@
-.\objects\iic.o: ..\Mylib\IIC.c
+.\objects\iic.o: ..\Mylib\iic.c
 .\objects\iic.o: ..\USER\stm32f4xx.h
 .\objects\iic.o: ..\CMSIS\core_cm4.h
 .\objects\iic.o: D:\Keil_MDK\ARM\ARMCC\Bin\..\include\stdint.h
@@ -24,5 +24,5 @@
 .\objects\iic.o: D:\Keil_MDK\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\iic.o: D:\Keil_MDK\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\iic.o: D:\Keil_MDK\ARM\ARMCC\Bin\..\include\math.h
-.\objects\iic.o: ..\Mylib\IIC.h
+.\objects\iic.o: ..\Mylib\iic.h
 .\objects\iic.o: ..\Mylib\delay.h
