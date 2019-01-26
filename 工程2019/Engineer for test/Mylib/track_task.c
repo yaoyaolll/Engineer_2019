@@ -34,8 +34,8 @@ void track_cal(void)
 	
 	if (track_on_flag)                    //开启履带
 	{
-		track_vel_pid[0].SetPoint = -5000;
-		track_vel_pid[1].SetPoint = 5000;
+		track_vel_pid[0].SetPoint = -1500;
+		track_vel_pid[1].SetPoint = 1500;
 	}		
 	else                                  //关闭履带
 		track_vel_pid[0].SetPoint = track_vel_pid[1].SetPoint = 0;

@@ -23,7 +23,7 @@ int cur_error_num, last_error_num;			//错误码
 int main()
 {
 	System_Configration();
-	while(1)
+while(1)
 	{
 		
 	}
@@ -46,8 +46,8 @@ void SysTick_Handler(void)
 	
     cur_error_num = offline_detect();					//读取断线信息 
 
-	if(cur_error_num == 0)								//正常状态开始工作
-    {
+//	if(cur_error_num == 0)								//正常状态开始工作
+//    {
         TIM_Cmd(TIM2, DISABLE);
         LED_R_OFF;
         switch_mode();							 		//判断控制模式
@@ -140,14 +140,14 @@ void SysTick_Handler(void)
 //		}
 		
 		key_refresh(); 										//更新按键状态
-    }
-	else if(cur_error_num != last_error_num)				//断线状态改变
-	{
-        TIM_Cmd(TIM2, ENABLE);								//启动定时器，控制红色LED闪烁
-		chassis_power_off();
-//		ExpandSend(0, 0, 0, 0);
-//		TransformSend(0, 0, 0, 0);
-    }
+//    }
+//	else if(cur_error_num != last_error_num)				//断线状态改变
+//	{
+//        TIM_Cmd(TIM2, ENABLE);								//启动定时器，控制红色LED闪烁
+//		chassis_power_off();
+////		ExpandSend(0, 0, 0, 0);
+////		TransformSend(0, 0, 0, 0);
+//    }
     last_error_num = cur_error_num;							//改变状态，用于检测断线信息改变
 	
 	return_state();
@@ -177,7 +177,7 @@ void System_Configration(void)
 	
     delay_ms(5000);
 
-//    solenoid_config();
+    solenoid_config();
 //	switch_config();
 //	ServoConfiguration();
 //    
@@ -193,6 +193,8 @@ void System_Configration(void)
 //    KS103_INIT(KS103_DEVICE_ADDRESS2);
 //	KS103_INIT(KS103_DEVICE_ADDRESS3);
 //	Change_ID(KS103_DEVICE_ADDRESS1, KS103_DEVICE_ADDRESS2);		//更改ID号函数，需要时取消注释，具体见KS103.h
+	chassis_vel_pid_init(7.5f, 2.5f, 10.0f, 100.0f);
+	track_vel_pid_init(17.5f, 5.0f, 0, 100.0f);
     LED_Configration();								//配置LED，当蓝色LED亮起，进入工作状态
 
     SysTick_Config(168000);
